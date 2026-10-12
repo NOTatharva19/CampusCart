@@ -8,6 +8,7 @@ from flask import Flask, jsonify, render_template, request
 from prometheus_client import (
     CONTENT_TYPE_LATEST,
     Counter,
+    Gauge,
     Histogram,
     generate_latest,
 )
@@ -29,7 +30,7 @@ LATENCY = Histogram(
     ["endpoint"],
 )
 
-ORDERS = Counter(
+ORDERS = Gauge(
     "campuscart_orders_total",
     "Number of successfully placed demo orders",
 )
@@ -236,11 +237,17 @@ def checkout():
 
 @app.get("/metrics")
 def metrics():
+    with get_db() as db:
+        total_orders = db.execute(
+            "SELECT COUNT(*) FROM orders"
+        ).fetchone()[0]
+
+    ORDERS.set(total_orders)
+
     return app.response_class(
         generate_latest(),
         mimetype=CONTENT_TYPE_LATEST,
     )
-
 
 if __name__ == "__main__":
     app.run(
