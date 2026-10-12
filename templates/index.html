@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>CampusCart — Your campus, your cart.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="announcement">🎓 STUDENT LIFE, MADE EASIER — GOOD FINDS, BETTER PRICES</div>
+
+  <header class="navbar">
+    <a href="/" class="brand"><span class="brand-icon">c.</span> campuscart<span class="brand-dot">.</span></a>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#why-us">Why CampusCart?</a>
+    </nav>
+    <button class="cart-button" id="cart-open">🛒 Cart <span id="cart-count">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> YOUR CAMPUS MARKETPLACE</div>
+        <h1>Big student energy.<br><span>Little student budget.</span></h1>
+        <p>Everything you need for campus life, all in one place. Discover your next favourite thing without emptying your wallet.</p>
+        <div class="hero-actions">
+          <a href="#shop" class="primary-button">Explore the collection <span>↗</span></a>
+          <span class="trust-note">✳ Made for students, by the student spirit.</span>
+        </div>
+        <div class="hero-stats">
+          <div><strong>8+</strong><small>Handpicked finds</small></div>
+          <div><strong>4.7/5</strong><small>Average rating</small></div>
+          <div><strong>₹249</strong><small>Starts from</small></div>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="art-circle circle-one"></div>
+        <div class="art-circle circle-two"></div>
+        <div class="floating-note note-top">✦ Your next find</div>
+        <div class="hero-product">🎒</div>
+        <div class="floating-note note-bottom"><span class="mini-check">✓</span><span><b>Campus-ready.</b><br>Budget-approved.</span></div>
+        <span class="spark spark-one">✳</span>
+        <span class="spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <section class="benefits" id="why-us">
+      <div><span>↗</span><p><b>Student-friendly prices</b><small>More value, less spending</small></p></div>
+      <div><span>♡</span><p><b>Curated essentials</b><small>Useful finds for daily life</small></p></div>
+      <div><span>✓</span><p><b>Simple checkout</b><small>A smoother shopping demo</small></p></div>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">THE GOOD STUFF</div>
+          <h2>Find your next <span>favourite.</span></h2>
+          <p>Little upgrades that make college life better.</p>
+        </div>
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="search" type="search" placeholder="Search your next find..." aria-label="Search products">
+        </div>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter active" data-category="All">Everything <span>08</span></button>
+        <button class="filter" data-category="Electronics">Electronics</button>
+        <button class="filter" data-category="Study">Study essentials</button>
+        <button class="filter" data-category="Fashion">Fashion</button>
+        <button class="filter" data-category="Accessories">Accessories</button>
+      </div>
+
+      <div class="product-grid" id="products">
+        <p>Loading your campus finds...</p>
+      </div>
+      <p class="empty-state" id="empty-state" hidden>No products found. Try another search!</p>
+    </section>
+
+    <section class="bottom-banner">
+      <div>
+        <div class="eyebrow">YOUR WALLET SAYS THANK YOU</div>
+        <h2>Good things don't have to cost more.</h2>
+        <p>Make your next campus essential a smart find.</p>
+      </div>
+      <a href="#shop" class="banner-button">Find your thing ↗</a>
+      <span class="banner-art">✳</span>
+    </section>
+  </main>
+
+  <footer>
+    <a href="/" class="brand"><span class="brand-icon">c.</span> campuscart<span class="brand-dot">.</span></a>
+    <p>A student e-commerce demo project.</p>
+    <span>Made for campus life © 2026</span>
+  </footer>
+
+  <div class="drawer-backdrop" id="backdrop"></div>
+
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-header">
+      <div><div class="eyebrow">YOUR PICKS</div><h2>Your cart <span id="drawer-count">(0)</span></h2></div>
+      <button id="cart-close" class="close-button" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="total-line"><span>Subtotal</span><strong id="cart-total">₹0</strong></div>
+      <small>Demo checkout only. No payment is collected.</small>
+      <button class="primary-button checkout-button" id="checkout">Continue to checkout ↗</button>
+    </div>
+  </aside>
+
+  <div class="modal-backdrop" id="checkout-modal">
+    <form class="checkout-modal" id="checkout-form">
+      <button type="button" class="close-button modal-close" id="modal-close" aria-label="Close checkout">✕</button>
+      <div class="eyebrow">ALMOST YOURS</div>
+      <h2>Let's make it official.</h2>
+      <p>This is a demo order. No real payment or delivery is involved.</p>
+      <label for="customer-name">Your name</label>
+      <input id="customer-name" name="name" maxlength="100" required placeholder="Enter your name">
+      <div class="total-line"><span>Order total</span><strong id="checkout-total">₹0</strong></div>
+      <button class="primary-button checkout-button" type="submit">Place demo order ↗</button>
+      <p id="checkout-message" role="status"></p>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
